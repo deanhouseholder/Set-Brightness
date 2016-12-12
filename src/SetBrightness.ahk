@@ -1,7 +1,7 @@
 #Persistent
 #SingleInstance, Force
 #NoEnv
-Menu, tray, icon, %A_ScriptDir%\SetBrightness.ico
+IfEqual, A_IsCompiled, , Menu, Tray, Icon, %A_ScriptDir%\SetBrightness.ico
 Bright := 100
 
 ShowBanner(Bright)
