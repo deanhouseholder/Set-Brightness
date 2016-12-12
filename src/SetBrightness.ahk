@@ -12,20 +12,20 @@ ShowBanner(Bright)
 	y = % (MonBottom / 2) - 100
 	w = %MonRight%
 	xtext = % (MonRight / 2) - 450
-	Gui, 1:Destroy
-	Gui, 1:+AlwaysOnTop -Caption +Owner +LastFound +E0x20
-	Gui, 1:Margin, 0, 0
-	Gui, 1:Color, Black
-	Gui, 1:Font, cWhite s50 bold, Arial
-	Gui, 1:Add, Text, x%xtext% y60, Setting Brightness at %Bright%`%
+	Gui, 10:Destroy
+	Gui, 10:+AlwaysOnTop -Caption +Owner +LastFound +E0x20
+	Gui, 10:Margin, 0, 0
+	Gui, 10:Color, Black
+	Gui, 10:Font, cWhite s50 bold, Arial
+	Gui, 10:Add, Text, x%xtext% y60, Setting Brightness at %Bright%`%
 	WinSet, Transparent, 200
-	Gui, 1:Show, NoActivate x%x% y%y% h200 w%w%
+	Gui, 10:Show, NoActivate x%x% y%y% h200 w%w%
 	SetTimer, HideBanner, -1500
 }
 
 HideBanner()
 {
-	Gui, 1:Destroy
+	Gui, 10:Destroy
 }
 
 ChangeBrightness(Bright)
@@ -57,11 +57,14 @@ ChangeBrightness(Bright)
 	Loop, %MonCount%
 	{
 		SysGet, Mon, Monitor, %A_Index%
-		Gui, 2:+AlwaysOnTop -Caption +Owner +LastFound +E0x20
-		Gui, 2:Margin, 0, 0
-		Gui, 2:Color, Black
+		w := Abs(MonRight - MonLeft)
+		b := Abs(MonBottom - MonTop)
+		;MsgBox, Left: %MonLeft% -- Top: %MonTop% -- Right: %MonRight% -- Bottom %MonBottom% w: %w% -- b: %b%
+		Gui, %A_Index%:+AlwaysOnTop -Caption +Owner +LastFound +E0x20
+		Gui, %A_Index%:Margin, 0, 0
+		Gui, %A_Index%:Color, Black
 		WinSet, Transparent, %Transparency%
-		Gui, 2:Show, NoActivate x0 y0 h%MonBottom% w%MonRight%
+		Gui, %A_Index%:Show, NoActivate x%MonLeft% y%MonTop% h%b% w%w%
 	}
 }
 
